@@ -1,0 +1,24 @@
+{
+  "name": "angular-pickadate-directive",
+  "main": "angular-pikaday.js",
+  "version": "1.2.0",
+  "homepage": "https://github.com/nverba/angular-pikaday",
+  "authors": [
+    "Jake Bresnehan <jakebresnehan@gmail.com>"
+  ],
+  "description": "an AngularJS directive wraper that aims to make using Pikaday with Angular as simple as possible.",
+  "keywords": [
+    "AngularJS",
+    "directive",
+    "Pikaday",
+    "Angular"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
