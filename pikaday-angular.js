@@ -40,6 +40,7 @@
           defaultDate: new Date(attrs.defaultDate),
           setDefaultDate: attrs.setDefaultDate === 'true',
           firstDay: attrs.firstDay ? parseInt(attrs.firstDay) : 0,
+          numberOfMonths: attrs.numberOfMonths ? parseInt(attrs.numberOfMonths) : 1,
           minDate: new Date(attrs.minDate),
           maxDate: new Date(attrs.maxDate),
           yearRange: attrs.yearRange ? JSON.parse(attrs.yearRange) : 10, // Accepts int (10) or 2 elem array ([1992, 1998]) as strings
