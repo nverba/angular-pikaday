@@ -27,9 +27,9 @@
         config = configs;
       };
     })
-    .directive('pikaday', ['pikadayConfig', pikadayDirectiveFn]);
+    .directive('pikaday', ['pikadayConfig', '$interpolate', pikadayDirectiveFn]);
 
-  function pikadayDirectiveFn(pikadayConfig) {
+  function pikadayDirectiveFn(pikadayConfig, $interpolate) {
 
     return {
 
@@ -110,9 +110,13 @@
 
             case "minDate":
             case "maxDate":
+
+              config[attr] = new Date($interpolate(value)(scope));
+              break;
+
             case "defaultDate":
 
-              config[attr] = new Date(value);
+              config[attr] = $interpolate(value)(scope);
               break;
 
             // Elements
