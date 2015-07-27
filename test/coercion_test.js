@@ -4,6 +4,26 @@ describe('directive: pikaday', function() {
 
   // INLINE
 
+  describe('default-date', function(){
+	  var parse;
+	  beforeEach(inject(function($rootScope, $compile) {
+
+	    parse = function (html){
+		  var scope    = $rootScope.$new();
+		  element  = angular.element(html);
+
+		  compiled = $compile(element)(scope);
+		  scope.$digest();
+		  return scope;
+	    }
+      }));
+
+	  it('evaluates an expression when setting default-date', function(){
+		var scope = parse('<input pikaday="myPickerObject" default-date="{{\'2008-01-25\'}}">')
+		assert.deepEqual(scope.myPickerObject._o.defaultDate, '2008-01-25');
+	  });
+  });
+
   describe('inline', function() {
 
     var element, scope;
@@ -44,6 +64,7 @@ describe('directive: pikaday', function() {
 
       compiled = $compile(element)(scope);
       scope.$digest();
+
 
     }));
 
@@ -118,7 +139,7 @@ describe('directive: pikaday', function() {
       });
 
       it("should apply default-date ", function() {
-        assert.deepEqual(scope.myPickerObject._o.defaultDate.getTime(), 884304000000);
+        assert.deepEqual(scope.myPickerObject._o.defaultDate, "01/09/1998");
       });
 
       // it("should provide the trigger element", function() {
