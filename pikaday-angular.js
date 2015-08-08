@@ -112,7 +112,7 @@
             case "maxDate":
             case "defaultDate":
 
-              config[attr] = new Date(value);
+              config[attr] = (value === 'now')? new Date(): new Date(value);
               break;
 
             // Elements
