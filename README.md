@@ -15,6 +15,9 @@ Then use the `pikaday` attribute to bind the picker to a scope.
 ```
 You now have access to Pikaday's methods from the scoped object `myPickerObject`.
 
+## Model
+The value put to `ng-model` will be a formated string with chosen date. To store & read `Date` objects form model, you can combine the module with `$parsers` & `$formatters` or let [angular-dateParser](https://github.com/dnasir/angular-dateParser) do it for you.
+
 ## Attributes
 
 Any of Pikaday's options can be passed to the corresponding attribute, the directive takes care of coercing the value to the proper type.*
