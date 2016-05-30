@@ -150,7 +150,9 @@
         }
         // instantiate pikaday with config, bind to scope, add destroy event callback
         var picker = new Pikaday(config);
-        scope.pikaday = picker;
+        if (attrs.pikaday) {
+          scope.pikaday = picker;
+        }
 
         if (modelCtrl) {
           modelCtrl.$formatters.push(function (modelValue) {
@@ -166,8 +168,7 @@
           });
 
           modelCtrl.$parsers.push(function (viewValue) {
-            date = picker.getDate();
-            return date;
+            return picker.getDate();
           });
         }
 
