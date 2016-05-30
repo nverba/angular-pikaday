@@ -1,6 +1,14 @@
 # __pikaday-angular__ <sup>v2.0.0 </sup>
 __pikaday-angular__ is a directive wraper that aims to make using __[Pikaday](https://github.com/dbushell/Pikaday)__ with __[AngularJS](https://angularjs.org/)__ as simple as possible. [Examples &#8594;](http://nverba.github.io/pikaday-angular/)
 
+## Install (NPM & Bower)
+
+```
+[npm || bower] install --save pikaday-angular
+```
+
+pikaday-angular is provided in a [UMD](https://github.com/umdjs/umd) wrapper, making it compatible with several build systems & preprocessors such as [Browserify](http://browserify.org/), see the [source of the Example page](https://github.com/nverba/pikaday-angular/tree/gh-pages) to see pikaday-angular being used with Browserify & Gulp.
+
 
 __How simple?__  -  Include the module as a dependency.
 
@@ -11,9 +19,9 @@ angular.module('YourApp', ['pikaday'])
 Then use the `pikaday` attribute to bind the picker to a scope.
 
 ```HTML
-<input pikaday="myPickerObject">
+<input pikaday="myPickerObject" ng-model="date">
 ```
-You now have access to Pikaday's methods from the scoped object `myPickerObject`.
+You now have access to Pikaday's methods from the scoped object `myPickerObject`. and `date`'s value will be a date object representing the value.
 
 ## Attributes
 
@@ -22,8 +30,10 @@ Any of Pikaday's options can be passed to the corresponding attribute, the direc
 <sub> *With the exception of function expressions, which are bound as callbacks. see: [Functions](#functions) </sub>
 
 ```HTML
-<input pikaday="myPickerObject" number-of-months="2">
+<input pikaday ng-model="date" number-of-months="2" min-date="minDate" maxDate="maxDate">
 ```
+
+`minDate` and `maxDate` are watched, so that you can change max/min date dynamically. 
 
 ## Global config
 
@@ -116,14 +126,6 @@ If you load [Moment.js](http://momentjs.com/) anywhere in your HTML, Pikaday wil
 > ___Caveat:___ Whilst it's possible to specify some fancy output formats with Moment, it may have a detrimental effect on the users ability to enter a date in the input field, as Moment.js will expect the input to conform to the current format setting. See [Moment's docs](http://momentjs.com/docs/#/parsing/string/) for clarification of some of the issues regarding date string parsing.
 
 To get Moment.js to handle i18n output formatting, you need to load the appropriate Moment.js locale file. _Moment will automatically default to the most recently loaded locale file_. Explicit locale selection can be made programmatically by calling `moment.locale("<key>")` [with the key of a loaded locale](http://momentjs.com/docs/#/i18n/instance-locale/).
-
-## NPM & Bower
-
-```
-[npm || bower] install --save pikaday-angular
-```
-
-pikaday-angular is provided in a [UMD](https://github.com/umdjs/umd) wrapper, making it compatible with several build systems & preprocessors such as [Browserify](http://browserify.org/), see the [source of the Example page](https://github.com/nverba/pikaday-angular/tree/gh-pages) to see pikaday-angular being used with Browserify & Gulp.
 
 ## Testing
 
