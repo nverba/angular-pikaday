@@ -149,18 +149,8 @@
           });
 
           modelCtrl.$parsers.push(function (viewValue) {
-            var date;
-            if (hasMoment) {
-              date = moment(viewValue, picker._o.format);
-            } else {
-              date = new Date(Date.parse(viewValue));
-            }
-
-            if (date == "Invalid Date" || (typeof date.isValid === "function" && !date.isValid())) {
-              modelCtrl.$setValidity('date', false);
-              return undefined;
-            }
-            return hasMoment? date.toDate(): date;
+            date = picker.getDate();
+            return date;
           })
         }
 
