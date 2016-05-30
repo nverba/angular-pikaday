@@ -32,12 +32,12 @@
   function pikadayDirectiveFn(pikadayConfig) {
 
     return {
-
       restrict: 'A',
       scope: {
         pikaday: '=', onSelect: '&', onOpen: '&', onClose: '&', onDraw: '&', disableDayFn: '&'
       },
-      link: function (scope, elem, attrs) {
+      require: '?ngModel',
+      link: function (scope, elem, attrs, modelCtrl) {
 
         // Init config Object
 
@@ -46,7 +46,7 @@
             scope.$apply();
           });
         }};
-
+        var hasMoment = typeof moment === 'function';
         // Decorate config with globals
 
         angular.forEach(pikadayConfig, function (value, key) {
@@ -131,11 +131,39 @@
 
           }
         }
-
         // instantiate pikaday with config, bind to scope, add destroy event callback
-
         var picker = new Pikaday(config);
         scope.pikaday = picker;
+
+        if (modelCtrl) {
+          modelCtrl.$formatters.push(function (modelValue) {
+            if (!modelValue) {
+              return modelValue
+            }
+            var date = new Date(Date.parse(modelValue));
+            if (date == "Invalid Date") {
+              modelCtrl.$setValidity('date', false);
+              return modelValue;
+            }
+            return hasMoment? moment(date).format(picker._o.format) : date.toDateString();
+          });
+
+          modelCtrl.$parsers.push(function (viewValue) {
+            var date;
+            if (hasMoment) {
+              date = moment(viewValue, picker._o.format);
+            } else {
+              date = new Date(Date.parse(viewValue));
+            }
+
+            if (date == "Invalid Date" || (typeof date.isValid === "function" && !date.isValid())) {
+              modelCtrl.$setValidity('date', false);
+              return undefined;
+            }
+            return hasMoment? date.toDate(): date;
+          })
+        }
+
         scope.$on('$destroy', function () {
           picker.destroy();
         });
