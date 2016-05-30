@@ -34,7 +34,14 @@
     return {
       restrict: 'A',
       scope: {
-        pikaday: '=', onSelect: '&', onOpen: '&', onClose: '&', onDraw: '&', disableDayFn: '&'
+        pikaday: '=',
+        minDate: '=',
+        maxDate: '=',
+        onSelect: '&',
+        onOpen: '&',
+        onClose: '&',
+        onDraw: '&',
+        disableDayFn: '&'
       },
       require: '?ngModel',
       link: function (scope, elem, attrs, modelCtrl) {
@@ -109,7 +116,17 @@
             // Dates
 
             case "minDate":
+              scope.$watch('minDate', function (nValue) {
+                if (!nValue) return;
+                picker.setMinDate(nValue);
+              });
+              break;
             case "maxDate":
+              scope.$watch('maxDate', function (nValue) {
+                if (!nValue) return;
+                picker.setMaxDate(nValue);
+              });
+              break;
             case "defaultDate":
 
               config[attr] = (value === 'now')? new Date(): new Date(value);
@@ -151,7 +168,7 @@
           modelCtrl.$parsers.push(function (viewValue) {
             date = picker.getDate();
             return date;
-          })
+          });
         }
 
         scope.$on('$destroy', function () {
