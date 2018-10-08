@@ -55,7 +55,7 @@ Example:
 <input pikaday="ctrl.myPicker" on-select="ctrl.onPikadaySelect(pikaday)">
 
 <!-- scope syntax - passing date to filter Fn -->
-<input pikaday="myPicker" on-disable-day="myDateFilter(date)">
+<input pikaday="myPicker" disable-day-fn="myDateFilter(date)">
 
 ```
 Then in your controller:
